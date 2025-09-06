@@ -1,0 +1,7 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/TheRe/Downloads/Sprint0/Content/images/atlas-definition.xml","C:\Users\TheRe\Downloads\Sprint0\Content\bin\DesktopGL\Content\images/atlas-definition.xml","CopyItem","File",210,210,0.0015863
+"C:/Users/TheRe/Downloads/Sprint0/Content/images/mario.png","C:/Users/TheRe/Downloads/Sprint0/Content/bin/DesktopGL/Content/images/atlas.xnb","TextureProcessor","Texture2DContent",6584,304645,0.1106911
+"C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/atlas-definition.xml","C:\Users\TheRe\Downloads\Sprint0\Content\bin\DesktopGL\Content\SPRITES/atlas-definition.xml","CopyItem","File",210,210,0.0027978
+"C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/atlas-definition2.xml","C:/Users/TheRe/Downloads/Sprint0/Content/bin/DesktopGL/Content/SPRITES/atlas-definition2.xnb","PassThroughProcessor","Object",144,177,0.098265
+"C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/File.xml","C:/Users/TheRe/Downloads/Sprint0/Content/bin/DesktopGL/Content/SPRITES/atlas-definition.xnb","PassThroughProcessor","Object",144,177,0.0024473
+"C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/mario.png","C:/Users/TheRe/Downloads/Sprint0/Content/bin/DesktopGL/Content/SPRITES/atlas.xnb","TextureProcessor","Texture2DContent",6584,304645,0.1036579

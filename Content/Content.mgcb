@@ -13,3 +13,43 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin images/atlas-definition.xml
+/copy:images/atlas-definition.xml
+
+#begin images/mario.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/mario.png;images/atlas.png
+
+#begin SPRITES/atlas-definition.xml
+/copy:SPRITES/atlas-definition.xml
+
+#begin SPRITES/atlas-definition2.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SPRITES/atlas-definition2.xml
+
+#begin SPRITES/File.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SPRITES/File.xml;SPRITES/atlas-definition.xml
+
+#begin SPRITES/mario.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SPRITES/mario.png;SPRITES/atlas.png
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/TheRe/Downloads/Sprint0/Content/images/mario.png</File>
+    <File>C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/atlas-definition2.xml</File>
+    <File>C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/File.xml</File>
+    <File>C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/mario.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File>images/atlas.png</File>
+    <File xsi:nil="true" />
+    <File>SPRITES/atlas-definition.xml</File>
+    <File>SPRITES/atlas.png</File>
+  </DestFiles>
+</SourceFileCollection>
