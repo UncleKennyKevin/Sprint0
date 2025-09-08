@@ -1,10 +1,10 @@
-/*
+
 using System;
 using System.Collections.Generic;
 
 namespace MonoGameLibrary.Graphics;
-/*
-public class animation
+
+public class Animation
 {
 
 //FROM MONO GAME TUTORIAL
@@ -40,29 +40,4 @@ public Animation(List<TextureRegion> frames, TimeSpan delay)
     Delay = delay;
 }
 
-<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas>
-    <Texture>images/atlas</Texture>
-    <Regions>
-        <Region name="slime-1" x="0" y="0" width="20" height="20" />
-        <Region name="slime-2" x="0" y="20" width="20" height="20" />
-        <Region name="bat-1" x="20" y="0" width="20" height="20" />
-        <Region name="bat-2" x="20" y="20" width="20" height="20" />
-        <Region name="bat-3" x="40" y="0" width="20" height="20" />
-    </Regions>
-    <Animations>
-        <Animation name="slime-animation" delay="200">
-            <Frame region="slime-1" />
-            <Frame region="slime-2" />
-        </Animation>
-        <Animation name="bat-animation" delay="200">
-            <Frame region="bat-1" />
-            <Frame region="bat-2" />
-            <Frame region="bat-1" />
-            <Frame region="bat-3" />
-        </Animation>
-    </Animations>
-</TextureAtlas>
-
 }
-*/

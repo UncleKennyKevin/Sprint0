@@ -2,6 +2,16 @@
 <TextureAtlas>
     <Texture>images/atlas</Texture>
     <Regions>
-        <Region name="slime" x="0" y="0" width="20" height="20" />
+        <Region name="mario-still" x="203" y="48" width="24" height="38" />
+        <Region name="mario-run1" x="227" y="48" width="24" height="38" />
+        <Region name="mario-run2" x="251" y="48" width="24" height="38" />
+        <Region name="mario-run3" x="275" y="48" width="24" height="38" />
     </Regions>
+    <Animations>
+        <Animation name="mario-animation" delay="200">
+            <Frame region="mario-run1" />
+            <Frame region="mario-run2" />
+            <Frame region="mario-run3" />
+        </Animation>
+    </Animations>
 </TextureAtlas>

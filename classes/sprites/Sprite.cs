@@ -3,13 +3,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGameLibrary.Graphics;
 
-public class sprite
+public class Sprite
 {
- //FROM MONO GAME TUTORIAL
-/// <summary>
-/// Gets or Sets the source texture region represented by this sprite.
+    
+    /// <summary>
+/// Creates a new sprite.
 /// </summary>
-public TextureRegion Region { get; set; }
+
+ //FROM MONO GAME TUTORIAL
+    /// <summary>
+    /// Gets or Sets the source texture region represented by this sprite.
+    /// </summary>
+    public TextureRegion Region { get; set; }
 
 /// <summary>
 /// Gets or Sets the color mask to apply when rendering this sprite.
@@ -107,16 +112,7 @@ public void Draw(SpriteBatch spriteBatch, Vector2 position)
     Region.Draw(spriteBatch, position, Color, Rotation, Origin, Scale, Effects, LayerDepth);
 }
 
-/// <summary>
-/// Creates a new sprite using the region from this texture atlas with the specified name.
-/// </summary>
-/// <param name="regionName">The name of the region to create the sprite with.</param>
-/// <returns>A new Sprite using the texture region with the specified name.</returns>
-public Sprite CreateSprite(string regionName)
-{
-    TextureRegion region = GetRegion(regionName);
-    return new Sprite(region);
-}
+
 
 //END OF MONOGAME TUTORIAL
 
