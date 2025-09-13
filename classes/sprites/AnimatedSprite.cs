@@ -1,61 +1,56 @@
-using System;
+namespace Sprint0;
+
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace MonoGameLibrary.Graphics;
-
-public class AnimatedSprite : Sprite
+public class AnimatedSprite : ISprite
 {
-
+    private Texture2D _texture;
+    private Vector2 _position;
+    private int _frameWidth;
+    private int _frameHeight;
+    private int _frameCount;
     private int _currentFrame;
-    private TimeSpan _elapsed;
-    private Animation _animation;
+    private float _timer;
+    private float _interval;
+    private int _startX;
+    private int _startY;
 
-    /// <summary>
-    /// Gets or Sets the animation for this animated sprite.
-    /// </summary>
-    public Animation Animation
+    public Vector2 Position
     {
-        get => _animation;
-        set
+        get => _position;
+        set => _position = value;
+    }
+
+    public AnimatedSprite(Texture2D texture, Vector2 position, int frameCount, float frameDuration, Point startPos, Point frameSize)
+    {
+        _texture = texture;
+        _position = position;
+        _frameCount = frameCount;
+        _frameWidth = texture.Width / frameCount;
+        _frameHeight = texture.Height;
+        _startX = startPos.X;
+        _startY = startPos.Y;
+        _frameWidth = frameSize.X;
+        _frameHeight = frameSize.Y;
+        _interval = frameDuration;
+        _currentFrame = 0;
+        _timer = 0f;
+    }
+
+    public void Update(GameTime gameTime)
+    {
+        _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        if (_timer >= _interval)
         {
-            _animation = value;
-            Region = _animation.Frames[0];
+            _currentFrame = (_currentFrame + 1) % _frameCount;
+            _timer = 0f;
         }
     }
 
-    /// <summary>
-    /// Creates a new animated sprite.
-    /// </summary>
-    public AnimatedSprite() { }
-
-    /// <summary>
-    /// Creates a new animated sprite with the specified frames and delay.
-    /// </summary>
-    /// <param name="animation">The animation for this animated sprite.</param>
-    public AnimatedSprite(Animation animation)
+    public void Draw(SpriteBatch spriteBatch)
     {
-        Animation = animation;
+        Rectangle sourceRect = new Rectangle(_startX + (_currentFrame * _frameWidth), _startY, _frameWidth, _frameHeight);
+        spriteBatch.Draw(_texture, _position, sourceRect, Color.White, 0f, Vector2.Zero, 3.0f, SpriteEffects.None, 0f);
     }
-
-/// <summary>
-/// Updates this animated sprite.
-/// </summary>
-/// <param name="gameTime">A snapshot of the game timing values provided by the framework.</param>
-public void Update(GameTime gameTime)
-{
-    _elapsed += gameTime.ElapsedGameTime;
-
-    if (_elapsed >= _animation.Delay)
-    {
-        _elapsed -= _animation.Delay;
-        _currentFrame++;
-
-        if (_currentFrame >= _animation.Frames.Count)
-        {
-            _currentFrame = 0;
-        }
-
-        Region = _animation.Frames[_currentFrame];
-    }
-}
 }

@@ -4,15 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/TheRe/Downloads/Sprint0/Content/Arial.spritefont</File>
+    <File>C:/Users/TheRe/Downloads/Sprint0/Content/images/Arial.spritefont</File>
     <File>C:/Users/TheRe/Downloads/Sprint0/Content/images/mario.png</File>
-    <File>C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/atlas-definition2.xml</File>
-    <File>C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/File.xml</File>
-    <File>C:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/mario.png</File>
   </SourceFiles>
   <DestFiles>
-    <File>images/atlas.png</File>
     <File xsi:nil="true" />
-    <File>SPRITES/atlas-definition.xml</File>
-    <File>SPRITES/atlas.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

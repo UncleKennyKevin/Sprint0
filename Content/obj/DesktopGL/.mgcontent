@@ -4,9 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>c:/Users/TheRe/Downloads/Sprint0/Content/images/mario.png</File>
     <File>c:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/atlas-definition2.xml</File>
     <File>c:/Users/TheRe/Downloads/Sprint0/Content/SPRITES/File.xml</File>
-    <File>c:/Users/TheRe/Downloads/Sprint0/Content/images/mario.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

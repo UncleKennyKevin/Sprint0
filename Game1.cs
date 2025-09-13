@@ -1,176 +1,88 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGameLibrary;
-using MonoGameLibrary.Graphics;
+using System.IO;
 
 namespace Sprint0;
 
-public class Game1 : Core
+public class Game1 : Game
 {
+    private GraphicsDeviceManager _graphics;
+    private SpriteBatch _spriteBatch;
 
-    // Defines the Mario sprite.
-    private Sprite _mario;
+    public ISprite currentSprite;
+    public ISprite marioStill;
+    public ISprite marioRunning;
 
-    // Defines the mario animated sprite.
-    private AnimatedSprite _marioAnimated;
+    public ISprite marioMovingStill;
+    public ISprite marioMovingRunning;
 
-    // Tracks the position of the slime.
-    private Vector2 _marioPosition;
+    private IController keyboardController;
+    private IController mouseController;
 
-    // Speed multiplier when moving.
-    private const float MOVEMENT_SPEED = 5.0f;
+    private TextSprite message;
 
-    public Game1() : base("Sprint0", 1280, 720, false)
+    private int marioX = 300;
+    private int marioY = 180;
+    private SpriteFont font;
+
+    public Game1()
     {
-
-    }
-
-    protected override void Initialize()
-    {
-        // TODO: Add your initialization logic here
-
-        base.Initialize();
+        _graphics = new GraphicsDeviceManager(this);
+        Content.RootDirectory = "Content/images";
+        IsMouseVisible = true;
     }
 
     protected override void LoadContent()
     {
-        // Load the atlas texture using the content manager
-        TextureAtlas atlas = TextureAtlas.FromFile(Content, "images/atlas-definition.xml");
+        _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // Create the slime sprite from the atlas.
-        _mario = atlas.CreateSprite("mario-still");
-        _mario.Scale = new Vector2(4.0f, 4.0f);
-        
-        // Create the slime animated sprite from the atlas.
-        _marioAnimated = atlas.CreateAnimatedSprite("mario-animation");
-        _marioAnimated.Scale = new Vector2(4.0f, 4.0f);
+        Texture2D marioTexture = Content.Load<Texture2D>("mario");
 
 
+        Rectangle firstMario = new Rectangle(203, 48, 32, 38);
+
+        marioStill = new StaticSprite(marioTexture, new Vector2(marioX, marioY), firstMario);
+
+        marioMovingStill = new MovingSprite(marioTexture, new Vector2(marioX, marioY), firstMario, new Vector2(0, 2));
+
+
+        marioRunning = new AnimatedSprite(marioTexture, new Vector2(marioX, marioY), 4, 0.2f, new Point(203, 48), new Point(30, 38));
+
+        marioMovingRunning = new MovingAnimatedSprite((AnimatedSprite)marioRunning, new Vector2(marioX, marioY), new Vector2(2, 0));
+
+        currentSprite = marioStill;
+
+
+        font = Content.Load<SpriteFont>("Arial");
+        message = new TextSprite(font, "Credits\nProgram Made By: Kevin Roback\nSprites from: https://www.mariouniverse.com/wp-content/img/sprites/nes/smb/mario.png", new Vector2(300, 300), Color.Black);
+
+        keyboardController = new KeyboardController(this);
+        mouseController = new MouseController(this);
+    }
+
+    public void SetCurrentSprite(ISprite sprite)
+    {
+        currentSprite = sprite;
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
-
-        // Update the slime animated sprite.
-        _marioAnimated.Update(gameTime);
-
-
-        // Check for keyboard input and handle it.
-        CheckKeyboardInput();
-
-        // Check for gamepad input and handle it.
-        CheckGamePadInput();
+        keyboardController.Update();
+        mouseController.Update();
+        currentSprite.Update(gameTime);
 
         base.Update(gameTime);
     }
-    private void CheckKeyboardInput()
-    {
-        // Get the state of keyboard input
-        KeyboardState keyboardState = Keyboard.GetState();
-
-        // If the space key is held down, the movement speed increases by 1.5
-        float speed = MOVEMENT_SPEED;
-        if (keyboardState.IsKeyDown(Keys.Space))
-        {
-            speed *= 1.5f;
-        }
-
-        // If the W or Up keys are down, move the slime up on the screen.
-        if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
-        {
-            _marioPosition.Y -= speed;
-        }
-
-        // if the S or Down keys are down, move the slime down on the screen.
-        if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
-        {
-            _marioPosition.Y += speed;
-        }
-
-        // If the A or Left keys are down, move the slime left on the screen.
-        if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
-        {
-            _marioPosition.X -= speed;
-        }
-
-        // If the D or Right keys are down, move the slime right on the screen.
-        if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
-        {
-            _marioPosition.X += speed;
-        }
-    }
-
-    private void CheckGamePadInput()
-    {
-        GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-
-        // If the A button is held down, the movement speed increases by 1.5
-        // and the gamepad vibrates as feedback to the player.
-        float speed = MOVEMENT_SPEED;
-        if (gamePadState.IsButtonDown(Buttons.A))
-        {
-            speed *= 1.5f;
-            GamePad.SetVibration(PlayerIndex.One, 1.0f, 1.0f);
-        }
-        else
-        {
-            GamePad.SetVibration(PlayerIndex.One, 0.0f, 0.0f);
-        }
-
-        // Check thumbstick first since it has priority over which gamepad input
-        // is movement.  It has priority since the thumbstick values provide a
-        // more granular analog value that can be used for movement.
-        if (gamePadState.ThumbSticks.Left != Vector2.Zero)
-        {
-            _marioPosition.X += gamePadState.ThumbSticks.Left.X * speed;
-            _marioPosition.Y -= gamePadState.ThumbSticks.Left.Y * speed;
-        }
-        else
-        {
-            // If DPadUp is down, move the slime up on the screen.
-            if (gamePadState.IsButtonDown(Buttons.DPadUp))
-            {
-                _marioPosition.Y -= speed;
-            }
-
-            // If DPadDown is down, move the slime down on the screen.
-            if (gamePadState.IsButtonDown(Buttons.DPadDown))
-            {
-                _marioPosition.Y += speed;
-            }
-
-            // If DPapLeft is down, move the slime left on the screen.
-            if (gamePadState.IsButtonDown(Buttons.DPadLeft))
-            {
-                _marioPosition.X -= speed;
-            }
-
-            // If DPadRight is down, move the slime right on the screen.
-            if (gamePadState.IsButtonDown(Buttons.DPadRight))
-            {
-                _marioPosition.X += speed;
-            }
-        }
-    }  
 
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        // Begin the sprite batch to prepare for rendering.
-        SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
-
-        // Draw the slime sprite.
-        _mario.Draw(SpriteBatch, _marioPosition);
-
-        // Draw the slime sprite.
-        _marioAnimated.Draw(SpriteBatch, Vector2.One);
-
-        // Always end the sprite batch when finished.
-        SpriteBatch.End();
+        _spriteBatch.Begin();
+        currentSprite.Draw(_spriteBatch);
+        message.Draw(_spriteBatch);
+        _spriteBatch.End();
 
         base.Draw(gameTime);
     }
